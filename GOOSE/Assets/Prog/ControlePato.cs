@@ -26,8 +26,11 @@ public class ControlePato : MonoBehaviour
                 pato.input = aaa.input;
                 pato.aaa = aaa;
                 pato.controle = true;
+                pato.podeExplodi = true;
 
                 pode = false;
+
+                pato.fill.fillAmount = 1;
 
                 Destroy(this.gameObject);
             }

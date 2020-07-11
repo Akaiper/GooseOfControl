@@ -16,26 +16,34 @@ public class Mov : MonoBehaviour
 
     public bool peraPato;
 
+    public bool buum;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         peraPato = false;
+
+        buum = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!peraPato)
+        if(!buum)
         {
-            moveVec.x = Input.GetAxis(input.horizontal_axis);
-            moveVec.y = Input.GetAxis(input.vertical_axis) ;
+            if (!peraPato)
+            {
+                moveVec.x = Input.GetAxis(input.horizontal_axis);
+                moveVec.y = Input.GetAxis(input.vertical_axis);
 
+            }
+            else
+            {
+                rb.velocity = Vector2.zero;
+            }
         }
-        else
-        {
-            rb.velocity = Vector2.zero;
-        }
+       
 
 
     }
@@ -43,24 +51,37 @@ public class Mov : MonoBehaviour
     private void FixedUpdate()
     {
 
-        if (!peraPato)
+        if(!buum)
         {
-            if (moveVec.x != 0 && moveVec.y != 0)
+            if (!peraPato)
             {
+                if (moveVec.x != 0 && moveVec.y != 0)
+                {
 
-                moveVec.x *= moveLimiter;
-                moveVec.y *= moveLimiter;
+                    moveVec.x *= moveLimiter;
+                    moveVec.y *= moveLimiter;
+                }
+
+                rb.velocity = moveVec * vel;
+
             }
-
-            rb.velocity = moveVec * vel;
-
+            else
+            {
+                rb.velocity = Vector2.zero;
+            }
         }
-        else
-        {
-            rb.velocity = Vector2.zero;
-        }
+       
 
 
 
+    }
+
+
+    public void VoarPraLonge(Vector2 vec)
+    {
+        rb.freezeRotation = false;
+        buum = true;
+        rb.AddForce(vec * 300);
+        rb.AddTorque(10);
     }
 }
