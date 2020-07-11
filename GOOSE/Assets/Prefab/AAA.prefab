@@ -118,6 +118,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   input: {fileID: 0}
   vel: 5
+  peraPato: 0
+  buum: 0
 --- !u!50 &7977626485491847049
 Rigidbody2D:
   serializedVersion: 4

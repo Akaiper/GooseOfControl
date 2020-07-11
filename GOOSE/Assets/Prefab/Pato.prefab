@@ -104,7 +104,7 @@ Transform:
   m_GameObject: {fileID: 6456229260255950449}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.06, y: -1.1, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_Children:
   - {fileID: 6595493463296981052}
   m_Father: {fileID: 0}
@@ -177,6 +177,7 @@ MonoBehaviour:
   controle: 0
   maxtempo: 3
   aaa: {fileID: 0}
+  podeExplodi: 0
   fill: {fileID: 8377435866531332234}
 --- !u!95 &6456229260255950448
 Animator:

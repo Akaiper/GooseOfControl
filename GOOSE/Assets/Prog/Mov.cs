@@ -62,7 +62,7 @@ public class Mov : MonoBehaviour
                     moveVec.y *= moveLimiter;
                 }
 
-                rb.velocity = moveVec * vel;
+                rb.velocity = moveVec * vel  ;
 
             }
             else
@@ -81,7 +81,8 @@ public class Mov : MonoBehaviour
     {
         rb.freezeRotation = false;
         buum = true;
+        GetComponent<BoxCollider2D>().enabled = false;
         rb.AddForce(vec * 300);
-        rb.AddTorque(10);
+        rb.AddTorque(100);
     }
 }
