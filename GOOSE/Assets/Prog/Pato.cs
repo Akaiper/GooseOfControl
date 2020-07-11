@@ -1,12 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.Mathematics;
 
-
-public class Mov : MonoBehaviour
+public class Pato : MonoBehaviour
 {
-
     public Inputschema input;
     public float vel;
     private Rigidbody2D rb;
@@ -14,36 +11,46 @@ public class Mov : MonoBehaviour
 
     private float moveLimiter = 0.7f;
 
-    public bool peraPato;
+    public bool controle;
+    private float tempo;
+    public float maxtempo;
+
+    public Mov aaa;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        peraPato = false;
+        controle = false;
+        tempo = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!peraPato)
+
+        if(controle)
         {
             moveVec.x = Input.GetAxis(input.horizontal_axis);
-            moveVec.y = Input.GetAxis(input.vertical_axis) ;
+            moveVec.y = Input.GetAxis(input.vertical_axis);
 
+            tempo += Time.deltaTime;
         }
-        else
+
+        if(tempo > maxtempo)
         {
-            rb.velocity = Vector2.zero;
+            controle = false;
+
+            aaa.peraPato = false;
         }
+        
 
 
     }
 
     private void FixedUpdate()
     {
-
-        if (!peraPato)
+        if (controle)
         {
             if (moveVec.x != 0 && moveVec.y != 0)
             {
@@ -53,14 +60,9 @@ public class Mov : MonoBehaviour
             }
 
             rb.velocity = moveVec * vel;
-
         }
-        else
-        {
-            rb.velocity = Vector2.zero;
-        }
+       
 
-
-
+        
     }
 }
