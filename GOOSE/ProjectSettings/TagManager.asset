@@ -8,6 +8,7 @@ TagManager:
   - AAA
   - Pato
   - SPAWN
+  - BackGround
   layers:
   - Default
   - TransparentFX

@@ -175,7 +175,7 @@ MonoBehaviour:
   input: {fileID: 0}
   vel: 5.5
   controle: 0
-  maxtempo: 3
+  maxtempo: 2
   aaa: {fileID: 0}
   podeExplodi: 0
   fill: {fileID: 8377435866531332234}

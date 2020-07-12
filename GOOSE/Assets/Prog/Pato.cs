@@ -46,7 +46,7 @@ public class Pato : MonoBehaviour
 
         fill.fillAmount = 0;
 
-        quack = GetComponent<AudioSource>();
+        quack = GameObject.FindGameObjectWithTag("BackGround").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -82,7 +82,7 @@ public class Pato : MonoBehaviour
         actual_vel = (float)Math.Sqrt(rb.velocity.x * rb.velocity.x) + (float)Math.Sqrt(rb.velocity.y * rb.velocity.y);
 
        
-        animator.SetFloat("Vel", actual_vel - 0.1f);
+        animator.SetFloat("Vel", actual_vel - 0.07f);
 
     }
 
