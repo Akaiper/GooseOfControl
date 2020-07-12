@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class Pato : MonoBehaviour
@@ -25,6 +26,8 @@ public class Pato : MonoBehaviour
 
     public Image fill;
 
+    private GameObject spawn;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +36,7 @@ public class Pato : MonoBehaviour
         tempo = maxtempo;
         animator = GetComponent<Animator>();
         podeExplodi = false;
+        spawn = GameObject.FindGameObjectWithTag("SPAWN");
 
         fill.fillAmount = 0;
     }
@@ -51,7 +55,11 @@ public class Pato : MonoBehaviour
         }
         else
         {
-            rb.velocity = Vector2.zero;
+            if (tempo > 0)
+            {
+                rb.velocity = Vector2.zero;
+            }
+               
         }
 
         if(tempo <= 0 )
@@ -59,6 +67,8 @@ public class Pato : MonoBehaviour
             controle = false;
 
             aaa.peraPato = false;
+
+            Follow();
         }
         
 
@@ -80,12 +90,53 @@ public class Pato : MonoBehaviour
         }
         else
         {
-            rb.velocity = Vector2.zero;
+            if (tempo > 0)
+            {
+                rb.velocity = Vector2.zero;
+            }
         }
 
 
 
     }
+
+    private Vector2 Closer()
+    {
+        Vector2 closer = Vector2.zero;
+        float dist_min = 100000000000;
+        float aux = 0;
+
+        GameObject[] aaas;
+
+        aaas = GameObject.FindGameObjectsWithTag("AAA");
+
+        foreach (GameObject player in aaas)
+        {
+            aux = Vector2.Distance(transform.position, player.transform.position);
+
+            if(aux < dist_min)
+            {
+                dist_min = aux;
+                closer = player.transform.position;
+            }
+        }
+
+        return closer;
+    }
+
+    private void Follow()
+    {
+
+        Vector2 dir = Closer();
+
+        dir = dir - (Vector2)transform.position;
+
+        dir = dir.normalized;
+
+
+        rb.velocity = dir * vel * 1.03f;
+    }
+    
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -108,7 +159,8 @@ public class Pato : MonoBehaviour
 
     public void BUUM()
     {
-        
+
+        aaa.peraPato = false;
 
         Vector2 dir = Vector2.zero;
 
@@ -117,6 +169,10 @@ public class Pato : MonoBehaviour
         dir = dir.normalized;
 
         aaa_fudido.GetComponent<Mov>().VoarPraLonge(dir);
+
+        spawn.GetComponent<Spawn>().SpawnControlePato();
+        
+
         Destroy(this.gameObject);
     }
 }
