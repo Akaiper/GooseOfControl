@@ -173,9 +173,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 0}
-  vel: 5.5
+  vel: 5.25
   controle: 0
-  maxtempo: 2
+  maxtempo: 1.5
   aaa: {fileID: 0}
   podeExplodi: 0
   fill: {fileID: 8377435866531332234}

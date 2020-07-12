@@ -12,16 +12,25 @@ public class Spawn : MonoBehaviour
     private Vector2 min_pos;
     private Vector2 max_pos;
 
-    public int nplayer;
+    
     private int bum;
 
     public UnityEvent cabo;
+
+    public NPLAYERS N;
+
+    public GameObject[] AAA;
 
     private void Start()
     {
         min_pos = transform.GetChild(0).position;
         max_pos = transform.GetChild(1).position;
         bum = 0;
+
+        for (int i = 0; i < N.nplayer; i++)
+        {
+            AAA[i].SetActive(true);
+        }
     }
 
 
@@ -39,7 +48,7 @@ public class Spawn : MonoBehaviour
 
     public void SpawnControlePato()
     {
-        if(bum < nplayer - 2)
+        if(bum < N.nplayer - 2)
         {
             Vector3 new_pos = Vector3.zero;
 

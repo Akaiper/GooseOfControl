@@ -10,6 +10,8 @@ public class Menu : MonoBehaviour
 
 	public GameObject[] boyz;
 
+	public NPLAYERS nplayer;
+
 	// Start is called before the first frame update
     void Start()
     {
@@ -47,5 +49,11 @@ public class Menu : MonoBehaviour
 		}
 	}
 
+
+	public void Play(int n)
+    {
+		nplayer.nplayer = n;
+		SceneManager.LoadScene("Game");
+	}
 
 }
