@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Mathematics;
-
+using System;
 
 public class Mov : MonoBehaviour
 {
@@ -22,6 +22,10 @@ public class Mov : MonoBehaviour
 
     private bool peraColision;
 
+    private Animator animator;
+
+    private float actual_vel;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +35,8 @@ public class Mov : MonoBehaviour
         buum = false;
 
         peraColision = true;
+
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -49,8 +55,11 @@ public class Mov : MonoBehaviour
                 rb.velocity = Vector2.zero;
             }
         }
-       
 
+        actual_vel = (float) Math.Sqrt(rb.velocity.x * rb.velocity.x) + (float)Math.Sqrt(rb.velocity.y * rb.velocity.y);
+
+        animator.SetBool("Controle", peraPato);
+        animator.SetFloat("Vel", actual_vel - 0.1f);
 
     }
 
