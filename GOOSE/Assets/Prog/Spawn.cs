@@ -62,7 +62,7 @@ public class Spawn : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene("HiqueScene");
+        SceneManager.LoadScene("Game");
     }
 
 }

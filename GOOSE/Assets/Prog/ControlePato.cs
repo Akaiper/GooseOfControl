@@ -32,6 +32,8 @@ public class ControlePato : MonoBehaviour
 
                 pato.fill.fillAmount = 1;
 
+                aaa.pato = pato;
+
                 Destroy(this.gameObject);
             }
         }

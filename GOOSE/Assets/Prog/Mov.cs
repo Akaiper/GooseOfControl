@@ -15,8 +15,12 @@ public class Mov : MonoBehaviour
     private float moveLimiter = 0.7f;
 
     public bool peraPato;
+    public Pato pato;
+    public Mov aaa;
 
     public bool buum;
+
+    private bool peraColision;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +29,8 @@ public class Mov : MonoBehaviour
         peraPato = false;
 
         buum = false;
+
+        peraColision = true;
     }
 
     // Update is called once per frame
@@ -84,5 +90,41 @@ public class Mov : MonoBehaviour
         GetComponent<BoxCollider2D>().enabled = false;
         rb.AddForce(vec * 300);
         rb.AddTorque(100);
+    }
+
+    public IEnumerator test()
+    {
+        yield return new WaitForSeconds(0.5f);
+        peraColision = true;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(peraColision)
+        {
+            if (peraPato)
+            {
+                if (collision.gameObject.tag == "AAA")
+                {
+
+                    peraColision = false;
+
+                    aaa = collision.gameObject.GetComponent<Mov>();
+
+                    aaa.peraPato = true;
+                    pato.input = aaa.input;
+                    pato.aaa = aaa;
+                    aaa.pato = pato;
+                    aaa.peraColision = false;
+
+                    peraPato = false;
+
+                    StartCoroutine(aaa.test());
+
+                    Debug.Log(input.horizontal_axis);
+                }
+            }
+        }
+        
     }
 }
