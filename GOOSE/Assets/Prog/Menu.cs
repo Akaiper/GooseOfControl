@@ -29,16 +29,23 @@ public class Menu : MonoBehaviour
 
 	public void Credits()
 	{
-		creditos.SetActive(true);
-		foreach (GameObject boy in boyz)
+		if (!creditos.activeSelf)
 		{
-			boy.SetActive(false);
+			creditos.SetActive(true);
+			foreach (GameObject boy in boyz)
+			{
+				boy.SetActive(false);
+			}
+		}
+		else
+		{
+			creditos.SetActive(false);
+			foreach (GameObject boy in boyz)
+			{
+				boy.SetActive(true);
+			}
 		}
 	}
 
-	public void FechaCreditos()
-	{
-		creditos.SetActive(false);
-	}
 
 }
