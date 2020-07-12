@@ -5,7 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+	public GameObject creditos;
+
+	public GameObject[] boyz;
+
+	// Start is called before the first frame update
     void Start()
     {
         
@@ -21,5 +26,19 @@ public class Menu : MonoBehaviour
     {
         SceneManager.LoadScene("Game");
     }
+
+	public void Credits()
+	{
+		creditos.SetActive(true);
+		foreach (GameObject boy in boyz)
+		{
+			boy.SetActive(false);
+		}
+	}
+
+	public void FechaCreditos()
+	{
+		creditos.SetActive(false);
+	}
 
 }
