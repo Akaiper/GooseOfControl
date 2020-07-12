@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Unity.Mathematics;
+using System;
 
 public class Pato : MonoBehaviour
 {
@@ -28,6 +30,10 @@ public class Pato : MonoBehaviour
 
     private GameObject spawn;
 
+    private float actual_vel;
+
+    private AudioSource quack;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +45,8 @@ public class Pato : MonoBehaviour
         spawn = GameObject.FindGameObjectWithTag("SPAWN");
 
         fill.fillAmount = 0;
+
+        quack = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -70,8 +78,11 @@ public class Pato : MonoBehaviour
 
             Follow();
         }
-        
 
+        actual_vel = (float)Math.Sqrt(rb.velocity.x * rb.velocity.x) + (float)Math.Sqrt(rb.velocity.y * rb.velocity.y);
+
+       
+        animator.SetFloat("Vel", actual_vel - 0.1f);
 
     }
 
@@ -160,6 +171,8 @@ public class Pato : MonoBehaviour
     public void BUUM()
     {
 
+       
+
         aaa.peraPato = false;
 
         Vector2 dir = Vector2.zero;
@@ -171,8 +184,16 @@ public class Pato : MonoBehaviour
         aaa_fudido.GetComponent<Mov>().VoarPraLonge(dir);
 
         spawn.GetComponent<Spawn>().SpawnControlePato();
-        
+
+       
 
         Destroy(this.gameObject);
+    }
+
+    public void PlayBuum()
+    {
+        
+        quack.Play();
+
     }
 }
